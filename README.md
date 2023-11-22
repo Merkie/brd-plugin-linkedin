@@ -26,36 +26,39 @@ go get -u "github.com/merkie/brd-plugin-linkedin@latest"
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"os"
 
 	brdlinkedin "github.com/merkie/brd-plugin-linkedin"
-	brightdatasdk "github.com/merkie/brightdata-sdk-go"
+	"github.com/merkie/brightdata-sdk-go/unblocker"
 )
 
 func main() {
-	// Set up environment variables
-	customerID := os.Getenv("BRIGHTDATA_CUSTOMER_ID")
-	if customerID == "" {
-		panic("BRIGHTDATA_CUSTOMER_ID is not set")
-	}
+	// Your BrightData credentials
+	BrdCustomerId := "..."
+	BrdUnblockerPassword := "..."
 
-	unblockerPassword := os.Getenv("BRIGHTDATA_UNBLOCKER_PASSWORD")
-	if unblockerPassword == "" {
-		panic("BRIGHTDATA_UNBLOCKER_PASSWORD is not set")
-	}
-
-	// Create and authenticate the Bright Data client
-	brdClient := brightdatasdk.NewBrightDataClient(customerID).AuthenticateUnblocker(unblockerPassword)
-
-	// Fetch the LinkedIn profile
-	profile, err := brdlinkedin.FetchProfile(brdClient, "williamhgates")
+	// New Unblocker zone
+	ubZone, err := unblocker.NewUnblockerZone(BrdCustomerId, "unblocker", BrdUnblockerPassword, "", "", "")
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println(profile) // Output -> "Bill Gates"
+	// Fetch profile by passing the unblocker zone and the LinkedIn username
+	resp, err := brdlinkedin.FetchProfile(ubZone, "williamhgates")
+	if err != nil {
+		panic(err)
+	}
+
+	// *optional* Print the response as json
+	jsondata, err := json.MarshalIndent(resp, "", "  ")
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(string(jsondata))
 }
+
 ```
 
 ## Contributing

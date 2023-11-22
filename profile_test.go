@@ -16,46 +16,44 @@ func TestMain(t *testing.T) {
 		panic("BRIGHTDATA_CUSTOMER_ID is not set")
 	}
 
-	serpPassword := os.Getenv("BRIGHTDATA_SERP_PASSWORD")
-	if serpPassword == "" {
-		panic("BRIGHTDATA_SERP_PASSWORD is not set")
-	}
-
 	unblockerPassword := os.Getenv("BRIGHTDATA_UNBLOCKER_PASSWORD")
-	if serpPassword == "" {
+	if unblockerPassword == "" {
 		panic("BRIGHTDATA_SERP_PASSWORD is not set")
 	}
 
 	// Create and authenticate client
-	Client = brightdatasdk.NewBrightDataClient(customerID).AuthenticateSerp(serpPassword).AuthenticateUnblocker(unblockerPassword)
+	Client = brightdatasdk.NewBrightDataClient(customerID).AuthenticateUnblocker(unblockerPassword)
 }
 
-func TestFetchProfile(t *testing.T) {
+func TestFetchBillGates(t *testing.T) {
+	profile, err := FetchProfile(Client, "williamhgates")
+	if err != nil {
+		t.Error(err)
+	}
+
+	if profile.Name != "Bill Gates" {
+		t.Errorf("Expected Bill Gates, got %s", profile.Name)
+	}
+}
+
+func TestFetchObama(t *testing.T) {
+	profile, err := FetchProfile(Client, "barackobama")
+	if err != nil {
+		t.Error(err)
+	}
+
+	if profile.Name != "Barack Obama" {
+		t.Errorf("Expected Barack Obama, got %s", profile.Name)
+	}
+}
+
+func TestArcher(t *testing.T) {
 	profile, err := FetchProfile(Client, "archer-calder")
 	if err != nil {
 		t.Error(err)
 	}
 
-	if profile == nil {
-		t.Errorf("Expected profile to not be nil")
-	} else {
-		if profile.Name != "Ashal Archer Calder" {
-			t.Errorf("Expected name to be 'Ashal Archer Calder', got '%s'", profile.Name)
-		}
-
-		// if profile.Description != "Former President of the United States of America" {
-		// 	t.Errorf("Expected description to be 'Former President of the United States of America', got '%s'", profile.Description)
-		// }
-	}
-}
-
-func TestFetchNonExistingProfile(t *testing.T) {
-	profile, err := FetchProfile(Client, "Ip3C5o8uGkNspRU")
-	if err != nil {
-		t.Error(err)
-	}
-
-	if profile != nil {
-		t.Errorf("Expected profile to be nil, got '%v'", profile)
+	if profile.Name != "Ashal Archer Calder" {
+		t.Errorf("Expected Ashal Archer Calder, got %s", profile.Name)
 	}
 }

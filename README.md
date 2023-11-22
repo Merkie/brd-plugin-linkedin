@@ -123,4 +123,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Legal Disclaimer
 
-This project is an unofficial, community-made plugin and is not affiliated with, endorsed by, or in any way officially connected with LinkedIn, BrightData, or any of their subsidiaries or affiliates. The names LinkedIn and BrightData as well as related names, marks, emblems, and images are registered trademarks of their respective owners.
+This project is an independent, community-driven effort and is not officially affiliated with, endorsed by, or in any way connected to Bright Data, Google, LinkedIn, or any of their subsidiaries or affiliates. The names Bright Data, Google, LinkedIn, and any related trademarks are the property of their respective owners and are used here for identification purposes only. This project is developed under the MIT License and is not associated with any official offerings from these entities.

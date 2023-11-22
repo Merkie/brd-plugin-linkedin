@@ -6,15 +6,15 @@ import (
 	"regexp"
 	"strings"
 
-	brightdatasdk "github.com/merkie/brightdata-sdk-go"
+	"github.com/merkie/brightdata-sdk-go/unblocker"
 )
 
-func FetchProfile(BrdClient *brightdatasdk.BrightDataClient, LinkedinID string) (*Profile, error) {
+func FetchProfile(Unblocker *unblocker.UnblockerZone, LinkedinID string) (*Profile, error) {
 	var cleanProfile *Profile
 
 	for {
 		// Fetch the HTML
-		html, err := BrdClient.Unblocker("https://www.linkedin.com/in/" + LinkedinID + "/").Execute()
+		html, err := Unblocker.NewRequest("https://www.linkedin.com/in/" + LinkedinID + "/").Execute()
 		if err != nil {
 			return nil, err
 		}
@@ -27,7 +27,7 @@ func FetchProfile(BrdClient *brightdatasdk.BrightDataClient, LinkedinID string) 
 		// Grab the internal json string
 		jsonString := strings.Split(strings.Split(html, `<script type="application/ld+json">`)[1], `</script>`)[0]
 
-		// Unmarshal the json string
+		// Unmarshal the json `json:"knowledge"`string
 		var profileJson linkedInProfileJSON
 		err = json.Unmarshal([]byte(jsonString), &profileJson)
 		if err != nil {

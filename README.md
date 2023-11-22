@@ -121,6 +121,6 @@ Contributions to `brd-plugin-linkedin` are welcome! Please refer to the project'
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
+## Legal Disclaimer
 
-_Note: This project is not affiliated with LinkedIn LLC or Bright Data LLC._
+This project is an unofficial, community-made plugin and is not affiliated with, endorsed by, or in any way officially connected with LinkedIn, BrightData, or any of their subsidiaries or affiliates. The names LinkedIn and BrightData as well as related names, marks, emblems, and images are registered trademarks of their respective owners.

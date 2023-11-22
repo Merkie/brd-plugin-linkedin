@@ -4,10 +4,10 @@ import (
 	"os"
 	"testing"
 
-	brightdatasdk "github.com/merkie/brightdata-sdk-go"
+	"github.com/merkie/brightdata-sdk-go/unblocker"
 )
 
-var Client *brightdatasdk.BrightDataClient
+var Unblocker *unblocker.UnblockerZone
 
 func TestMain(t *testing.T) {
 	// get env variables
@@ -22,11 +22,19 @@ func TestMain(t *testing.T) {
 	}
 
 	// Create and authenticate client
-	Client = brightdatasdk.NewBrightDataClient(customerID).AuthenticateUnblocker(unblockerPassword)
+	// Client = brightdatasdk.NewBrightDataClient(customerID).AuthenticateUnblocker(unblockerPassword)
+	ub, err := unblocker.NewUnblockerZone(customerID, "unblocker", unblockerPassword, "", "", "")
+	if err != nil {
+		panic(err)
+	}
+
+	Unblocker = ub
 }
 
 func TestFetchBillGates(t *testing.T) {
-	profile, err := FetchProfile(Client, "williamhgates")
+	t.Parallel()
+
+	profile, err := FetchProfile(Unblocker, "williamhgates")
 	if err != nil {
 		t.Error(err)
 	}
@@ -37,7 +45,9 @@ func TestFetchBillGates(t *testing.T) {
 }
 
 func TestFetchObama(t *testing.T) {
-	profile, err := FetchProfile(Client, "barackobama")
+	t.Parallel()
+
+	profile, err := FetchProfile(Unblocker, "barackobama")
 	if err != nil {
 		t.Error(err)
 	}
@@ -48,7 +58,9 @@ func TestFetchObama(t *testing.T) {
 }
 
 func TestArcher(t *testing.T) {
-	profile, err := FetchProfile(Client, "archer-calder")
+	t.Parallel()
+
+	profile, err := FetchProfile(Unblocker, "archer-calder")
 	if err != nil {
 		t.Error(err)
 	}

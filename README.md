@@ -1,35 +1,26 @@
-# brd-plugin-linkedin (LinkedIn Plugin for BrightData SDK)
+# LinkedIn Plugin for BrightData SDK Go
 
-[![Go Version](https://img.shields.io/badge/Go-1.21.3-blue)](https://golang.org)
 [![GoDoc](https://pkg.go.dev/badge/github.com/merkie/brd-plugin-linkedin.svg)](https://pkg.go.dev/github.com/merkie/brd-plugin-linkedin)
 [![Go Report Card](https://goreportcard.com/badge/github.com/merkie/brd-plugin-linkedin)](https://goreportcard.com/report/github.com/merkie/brd-plugin-linkedin)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-`brd-plugin-linkedin` is a Go module designed to seamlessly integrate LinkedIn profile fetching functionality into applications using the [Go BrightData SDK](http://www.github.com/merkie/brightdata-sdk-go/).
-
-## Features
-
-- **LinkedIn Profile Fetching**: Easily fetch LinkedIn profiles using the Bright Data SDK.
-- **Simple Integration**: Designed to work seamlessly with [`brightdata-sdk-go`](http://www.github.com/merkie/brightdata-sdk-go/), ensuring a smooth integration.
-- **Efficient and Reliable**: Optimized for performance and reliability in fetching LinkedIn data.
+The LinkedIn plugin for [BrightData SDK Go](http://www.github.com/merkie/brightdata-sdk-go/) lets you fetch LinkedIn profiles and parse them as structs in your Go application.
 
 ## Installation
 
-To install `brd-plugin-linkedin`, first, make sure you have the BrightData SDK installed:
+Install BrightData SDK Go if you haven't already.
 
 ```bash
 go get -u "github.com/merkie/brightdata-sdk-go@latest"
 ```
 
-Then, install the LinkedIn plugin:
+Install the LinkedIn plugin:
 
 ```bash
 go get -u "github.com/merkie/brd-plugin-linkedin@latest"
 ```
 
 ## Usage
-
-Here's a quick example to demonstrate how to use `brd-plugin-linkedin`:
 
 ```go
 package main
